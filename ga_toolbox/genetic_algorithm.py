@@ -6,21 +6,7 @@ from ga_toolbox.settings import GAConfig
 
 
 class GeneticAlgorithm:
-    """Generic GA engine. It knows nothing about the problem being solved.
-
-    The user supplies:
-      init_fn()            -> a new random Chromosome
-      fitness_fn(chrom)    -> a number (the cost or score)
-      feasibility_fn(chrom)-> True if the solution is feasible
-      selection, crossover, mutation, replacement -> operator objects
-      config               -> GAConfig (optional, defaults are used if None)
-
-    Infeasible solutions are handled with a penalty: the engine adds
-    config.infeasible_penalty to their fitness, so feasible solutions always
-    win. Minimization and maximization are chosen with config.maximize.
-    run() returns (best_chromosome, history) where history holds the best
-    fitness found so far at each generation.
-    """
+    """Run a configurable genetic algorithm using user-supplied operators."""
 
     def __init__(self, init_fn, fitness_fn, feasibility_fn,
                  selection, crossover, mutation, replacement, config=None):

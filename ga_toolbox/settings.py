@@ -4,19 +4,7 @@ from dataclasses import dataclass
 
 @dataclass
 class GAConfig:
-    """All GA hyperparameters, each with a default value.
-
-    population_size: number of chromosomes in each generation.
-    generations: how many generations to run.
-    crossover_rate: probability that two parents are crossed (0 to 1).
-    mutation_rate: mutation rate passed to the mutation operator (0 to 1).
-    elitism_count: how many best chromosomes survive each generation unchanged.
-    tournament_size: group size for tournament selection (built by the user).
-    maximize: True to maximize fitness, False (default) to minimize it.
-    seed: random seed for reproducible runs (None = different every run).
-    infeasible_penalty: added to the cost of infeasible solutions (subtracted
-        when maximizing), so feasible solutions always rank above them.
-    """
+    """Configuration options for the genetic algorithm."""
 
     population_size: int = 100
     generations: int = 300

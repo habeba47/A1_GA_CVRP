@@ -19,12 +19,7 @@ def _check_bounds(low, high):
 
 
 class Chromosome(ABC):
-    """Base class for every chromosome type.
-
-    Stores the genes, the fitness (None until evaluated by the GA) and
-    whether the solution is feasible. Operators must never change a
-    chromosome in place: they work on copies made with copy().
-    """
+    """Base class for chromosome representations."""
 
     def __init__(self, genes):
         self.genes = list(genes)
@@ -63,12 +58,7 @@ class BinaryChromosome(Chromosome):
 
 
 class IntegerChromosome(Chromosome):
-    """Integer genes in [low, high].
-
-    With permutation=True the genes are a permutation of
-    low, low+1, ..., low+length-1 (each value exactly once), which is
-    useful for routing problems such as CVRP.
-    """
+    """Integer genes within bounds, optionally constrained to a permutation."""
 
     def __init__(self, genes, low=0, high=1, permutation=False):
         genes = list(genes)
