@@ -19,12 +19,20 @@ def _check_bounds(low, high):
 
 
 class Chromosome(ABC):
+    """Base class for every chromosome type.
+
+    Stores the genes, the fitness (None until evaluated by the GA) and
+    whether the solution is feasible. Operators must never change a
+    chromosome in place: they work on copies made with copy().
+    """
+
     def __init__(self, genes):
         self.genes = list(genes)
         self.fitness = None
         self.feasible = True
 
     def copy(self):
+        """Return an independent copy (new gene list, same settings)."""
         new_chromosome = copy.copy(self)
         new_chromosome.genes = self.genes.copy()
         return new_chromosome
@@ -35,14 +43,16 @@ class Chromosome(ABC):
     @classmethod
     @abstractmethod
     def random(cls, length, **kwargs):
-        pass
+        """Create a random chromosome with `length` genes."""
 
     @abstractmethod
     def is_valid(self):
-        pass
+        """True if the genes follow the rules of this representation."""
 
 
 class BinaryChromosome(Chromosome):
+    """Genes are 0 or 1."""
+
     @classmethod
     def random(cls, length, **kwargs):
         _check_length(length)
@@ -53,7 +63,17 @@ class BinaryChromosome(Chromosome):
 
 
 class IntegerChromosome(Chromosome):
+    """Integer genes in [low, high].
+
+    With permutation=True the genes are a permutation of
+    low, low+1, ..., low+length-1 (each value exactly once), which is
+    useful for routing problems such as CVRP.
+    """
+
     def __init__(self, genes, low=0, high=1, permutation=False):
+        genes = list(genes)
+        if permutation is True:
+            high = low + len(genes) - 1 if genes else low
         _check_bounds(low, high)
         if type(low) is not int or type(high) is not int:
             raise ValueError("integer bounds must be integers")
@@ -90,6 +110,8 @@ class IntegerChromosome(Chromosome):
 
 
 class FloatChromosome(Chromosome):
+    """Real-number genes in [low, high]."""
+
     def __init__(self, genes, low=0.0, high=1.0):
         _check_bounds(low, high)
         super().__init__(genes)

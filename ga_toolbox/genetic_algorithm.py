@@ -6,6 +6,22 @@ from ga_toolbox.settings import GAConfig
 
 
 class GeneticAlgorithm:
+    """Generic GA engine. It knows nothing about the problem being solved.
+
+    The user supplies:
+      init_fn()            -> a new random Chromosome
+      fitness_fn(chrom)    -> a number (the cost or score)
+      feasibility_fn(chrom)-> True if the solution is feasible
+      selection, crossover, mutation, replacement -> operator objects
+      config               -> GAConfig (optional, defaults are used if None)
+
+    Infeasible solutions are handled with a penalty: the engine adds
+    config.infeasible_penalty to their fitness, so feasible solutions always
+    win. Minimization and maximization are chosen with config.maximize.
+    run() returns (best_chromosome, history) where history holds the best
+    fitness found so far at each generation.
+    """
+
     def __init__(self, init_fn, fitness_fn, feasibility_fn,
                  selection, crossover, mutation, replacement, config=None):
         for name, function in (
@@ -89,6 +105,7 @@ class GeneticAlgorithm:
         return offspring
 
     def _apply_elitism(self, old_population, new_population):
+        """Put the best `elitism_count` old chromosomes back in place of the worst new ones."""
         count = self.config.elitism_count
         if count == 0:
             return new_population
@@ -110,6 +127,7 @@ class GeneticAlgorithm:
         return new_population
 
     def _evaluate(self, chromosome):
+        """Set feasibility and fitness of a chromosome (penalty if infeasible)."""
         if not callable(getattr(chromosome, "is_valid", None)) or not callable(
             getattr(chromosome, "copy", None)
         ):

@@ -46,3 +46,7 @@ assert not BinaryChromosome([0, True, 1]).is_valid()
 assert not IntegerChromosome([1, 1, 2], low=1, high=3, permutation=True).is_valid()
 assert not FloatChromosome([float("nan")], low=0.0, high=1.0).is_valid()
 print("edge-case tests passed")
+
+# permutation chromosome built directly with low > 1 must work
+assert IntegerChromosome([6, 5, 7], low=5, permutation=True).is_valid()
+print("permutation construction test passed")
