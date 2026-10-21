@@ -9,17 +9,16 @@ assert b.is_valid() and i.is_valid() and f.is_valid()
 
 c = i.copy()
 c.genes[0] = 99
-assert i.genes[0] != 99          # copy is independent
-assert not c.is_valid()          # 99 breaks the permutation
+assert i.genes[0] != 99
+assert not c.is_valid()
 
-GAConfig()                       # defaults work
+GAConfig()
 try:
     GAConfig(mutation_rate=1.5)
 except ValueError as e:
     print("OK:", e)
 print("chromosome tests passed")
 
-# Edge-case validation
 for bad_args in (
     {"population_size": 10, "generations": -1},
     {"population_size": 10, "tournament_size": 0},
@@ -47,6 +46,5 @@ assert not IntegerChromosome([1, 1, 2], low=1, high=3, permutation=True).is_vali
 assert not FloatChromosome([float("nan")], low=0.0, high=1.0).is_valid()
 print("edge-case tests passed")
 
-# permutation chromosome built directly with low > 1 must work
 assert IntegerChromosome([6, 5, 7], low=5, permutation=True).is_valid()
 print("permutation construction test passed")
