@@ -5,6 +5,7 @@
 - `ga_toolbox/chromosomes.py`: binary, integer, and float chromosomes.
 - `ga_toolbox/settings.py`: GA defaults and configuration validation (`GAConfig`).
 - `ga_toolbox/base_classes.py`: interfaces for the genetic operators.
+- `ga_toolbox/selection.py`: tournament and roulette-wheel selection operators.
 - `ga_toolbox/genetic_algorithm.py`: the reusable GA loop.
 - `tests/`: tests for chromosomes and the GA engine.
 - `cvrp/`: the CVRP implementation (problem, cost, fitness).
@@ -35,6 +36,11 @@ Every operator must follow these rules:
 
 Import the base classes with `from ga_toolbox.base_classes import Selection` (or Crossover, Mutation, Replacement).
 `maximize=False` means lower fitness is better (CVRP minimizes distance).
+
+Use `TournamentSelection(tournament_size=3)` or `RouletteSelection()` from
+`ga_toolbox`. Both return copies, support minimization and maximization, and
+prefer feasible chromosomes over infeasible ones when any feasible candidates
+are available.
 
 ## Use the toolbox
 

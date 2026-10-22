@@ -1,9 +1,12 @@
 from abc import ABC, abstractmethod
+from typing import Any, Sequence
 
 
 class Selection(ABC):
     @abstractmethod
-    def select(self, population, n, maximize):
+    def select(
+        self, population: Sequence[Any], n: int, maximize: bool
+    ) -> list[Any]:
         """Return n chromosomes (copies) chosen from the population."""
 
 
