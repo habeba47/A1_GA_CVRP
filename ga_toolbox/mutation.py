@@ -11,12 +11,10 @@ def _check_rate(rate):
 class Mutation(ABC):
     @abstractmethod
     def mutate(self, chromosome: Chromosome, mutation_rate: float):
-        """Return a new mutated chromosome; never modify the input."""
 
 class BinaryMutation(Mutation):
     def mutate(self, chromosome: BinaryChromosome, mutation_rate: float):
-        """Returns a new mutated Binary-Encoded chromosome using the Bit Flip Mutation algorithm"""
-
+        
         _check_rate(mutation_rate)
 
         new_genes = chromosome.genes.copy()
@@ -33,9 +31,7 @@ class BinaryMutation(Mutation):
 
 class UniformFloatingPointMutation(Mutation):
     def mutate(self, chromosome: FloatChromosome, mutation_rate: float):
-        """
-        Returns a new mutated Floating-point-Encoded chromosome using the Uniform Floating-Point Mutation algorithm
-        """
+
         _check_rate(mutation_rate)
 
         new_genes = chromosome.genes.copy()
@@ -59,9 +55,7 @@ class UniformFloatingPointMutation(Mutation):
 
 class IntegerMutation(Mutation):
     def mutate(self, chromosome: IntegerChromosome, mutation_rate: float):
-        """
-        Returns a new mutated Integer-Encoded chromosome using the Uniform Floating-Point Mutation algorithm
-        """
+
         if chromosome.permutation: # should not be integer mutated
             raise ValueError("Error: a permutated chromosome cannot be mutated using this method.")
 
