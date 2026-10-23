@@ -9,17 +9,6 @@ def _rank_key(chromosome, maximize):
 
 class GenerationalReplacement(Replacement):
     def replace(self, population, offspring, config: GAConfig):
-        """
-        Return the next population by applying Generational Replacement, same size as `population`.
-        Assumption: the offsprings and the population are already mutated and evaluated.
-        
-        Offspring replace the whole population. 
-            If there are too many, the best are kept
-            if too few, the best old chromosomes fill the gap.
-        
-        Needed parameters:
-        Maximize exists in GAconfig
-        """
         size = len(population)
         maximize = config.maximize
         if size == 0:
@@ -38,15 +27,6 @@ class GenerationalReplacement(Replacement):
 
 class SteadyStateReplacement(Replacement):
     def replace(self, population, offspring, config: GAConfig):
-        """
-        Return the next population by applying Steady-state Replacement, same size as `population`.
-
-        the best k offspring replace the k worst individuals
-        of the population; all other individuals survive unchanged.
-        
-        Needed parameters:
-        both K and Maximize exist in GAconfig
-        """
         size = len(population)
         if size == 0:
             raise ValueError("population cannot be empty")
