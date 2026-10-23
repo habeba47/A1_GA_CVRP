@@ -8,10 +8,6 @@ def _check_rate(rate):
     if isinstance(rate, bool) or not isinstance(rate, (int, float)) or not 0 <= rate <= 1:
         raise ValueError("rate must be a number between 0 and 1")
 
-class Mutation(ABC):
-    @abstractmethod
-    def mutate(self, chromosome: Chromosome, mutation_rate: float):
-
 class BinaryMutation(Mutation):
     def mutate(self, chromosome: BinaryChromosome, mutation_rate: float):
         
