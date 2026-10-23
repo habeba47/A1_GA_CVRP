@@ -50,7 +50,7 @@ class GeneticAlgorithm:
 
         for _ in range(config.generations):
             offspring = self._make_offspring(population)
-            new_population = self.replacement.replace(population, offspring, config.maximize)
+            new_population = self.replacement.replace(population, offspring, config)
             if not isinstance(new_population, (list, tuple)):
                 raise TypeError("replacement must return a list or tuple")
             if len(new_population) != config.population_size:

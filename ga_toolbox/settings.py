@@ -15,6 +15,7 @@ class GAConfig:
     maximize: bool = False
     seed: int = None
     infeasible_penalty: float = 100000.0
+    steady_state_replacement_count: int = 2
 
     def __post_init__(self):
         if type(self.population_size) is not int or self.population_size < 2:
@@ -29,6 +30,8 @@ class GAConfig:
             raise ValueError("maximize must be a boolean")
         if self.seed is not None and type(self.seed) is not int:
             raise ValueError("seed must be an integer or None")
+        if type(self.steady_state_replacement_count) is not int or self.steady_state_replacement_count < 1:
+            raise ValueError("steady_state_replacement_count must be an integer and at least 1")
 
         for name in ("crossover_rate", "mutation_rate"):
             value = getattr(self, name)

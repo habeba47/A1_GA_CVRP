@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Any, Sequence
+from .settings import GAConfig
 
 
 class Selection(ABC):
@@ -24,5 +25,8 @@ class Mutation(ABC):
 
 class Replacement(ABC):
     @abstractmethod
-    def replace(self, population, offspring, maximize):
-        """Return the next population, same size as `population`."""
+    def replace(self, population, offspring, config: GAConfig):
+        """
+        Return the next population, same size as `population`.
+        Assumption: the offsprings and the population are already mutated and evaluated.
+        """

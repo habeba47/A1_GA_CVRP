@@ -4,6 +4,8 @@ from ga_toolbox.genetic_algorithm import GeneticAlgorithm
 from ga_toolbox.crossover import MultiPointCrossover, OrderCrossover
 from ga_toolbox.selection import RouletteSelection, TournamentSelection
 from ga_toolbox.settings import GAConfig
+from ga_toolbox.mutation import BinaryMutation, UniformFloatingPointMutation, SwapMutation, IntegerMutation
+from ga_toolbox.replacement import SteadyStateReplacement, GenerationalReplacement
 
 __all__ = [
     "Chromosome",
@@ -20,4 +22,12 @@ __all__ = [
     "OrderCrossover",
     "GAConfig",
     "GeneticAlgorithm",
+    
+    "BinaryMutation",
+    "UniformFloatingPointMutation",
+    "SwapMutation",
+    "IntegerMutation",
+
+    "SteadyStateReplacement",
+    "GenerationalReplacement",
 ]
