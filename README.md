@@ -7,6 +7,8 @@
 - `ga_toolbox/base_classes.py`: interfaces for the genetic operators.
 - `ga_toolbox/selection.py`: tournament and roulette-wheel selection operators.
 - `ga_toolbox/genetic_algorithm.py`: the reusable GA loop.
+- `ga_toolbox/mutation.py`: all the mutation algorithms (`BinaryMutation`, `UniformFloatingPointMutation`, `IntegerMutation`, `SwapMutation`).
+- `ga_toolbox/replacement.py`: all the replacement algorithms (`SteadyStateReplacement`, `GenerationalReplacement`).
 - `tests/`: tests for chromosomes and the GA engine.
 - `cvrp/`: the CVRP implementation (problem, cost, fitness).
 
